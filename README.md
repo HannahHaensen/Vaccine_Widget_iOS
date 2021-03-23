@@ -1,6 +1,8 @@
 # Vaccine_Widget_iOS
 JavaScript Widget for iOS to get the vaccination progress in Germany.
 
+Use Scriptable in order to get your iOS Widget, just copy and paste the Script and execute it in Scriptable
+
 v.0.0.1
 - inital version
 - missing refresh
