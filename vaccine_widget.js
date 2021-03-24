@@ -97,9 +97,9 @@ class UIComp {
     let b3 = new UI(b).stack('h', [0, 0, 0, 5])
 
     b3.space(10)
-    const germany_total = 83;
+    const germany_total = 83190556;
 
-    const progress = Number.parseInt(vaccinated) / germany_total * 100;
+    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
 
     this.createProgressBar(progress, b3);
     b3.space()
@@ -132,9 +132,9 @@ class UIComp {
     b2.elem.center
     let b3 = new UI(b).stack('h', [0, 0, 0, 5])
 
-    const germany_total = 83;
+    const germany_total = 83190556;
 
-    const progress = Number.parseInt(vaccinated) / germany_total * 100;
+    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
     b3.text(Format.number(progress, 2, 'n/v') , ENV.fonts.small2, ENV.vaccinationColors.gray.color, 1, 1)
     b3.text('%', ENV.fonts.small2, trendColor, 1, 1)
 
