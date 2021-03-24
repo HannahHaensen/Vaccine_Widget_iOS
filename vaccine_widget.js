@@ -10,7 +10,7 @@
 
 const CFG = {
   openUrl: false,
-  scriptRefreshInterval: 20, // refresh after 1,5 hours (in seconds)
+  scriptRefreshInterval: 28800, // refresh after 8 hours (in seconds)
   scriptSelfUpdate: false, // script updates itself,
 }
 
