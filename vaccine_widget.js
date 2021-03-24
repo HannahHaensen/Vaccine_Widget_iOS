@@ -1,14 +1,11 @@
 /**
  *
- * AUTHOR: https://github.com/HannahHaensen/Vaccine_Widget_iOS
- * ISSUES: https://github.com/HannahHaensen/Vaccine_Widget_iOS/issues
+ * AUTHOR:
  * Code is adapted from:
  *    CREDITS: https://github.com/rphl - https://github.com/rphl/corona-widget/
- *
- * DATASOURCE from: https://interaktiv.morgenpost.de/data/corona/rki-vaccinations.json
- *
- * INSPIRED BY https://impfdashboard.de
- *
+ * data from: https://interaktiv.morgenpost.de/data/corona/rki-vaccinations.json
+ * inspired by https://impfdashboard.de/data/germany_vaccinations_timeseries_v2.1f32bff3.tsv
+ * https://impfdashboard.de/data/germany_vaccinations_by_state.93a1bc58.tsv
  */
 
 const CFG = {
@@ -128,7 +125,7 @@ class UIComp {
     let b2 = new UI(b).stack('h', [4, 0, 0, 5])
     b2.space(2)
     b2.text(vaccinated, ENV.fonts.small2, ENV.vaccinationColors.gray.color, 1, 1)
-    let trendColor =  ENV.vaccinationColors.green.color
+    let trendColor =  ENV.vaccinationColors.gray.color
     b2.text('↑', ENV.fonts.small2, trendColor, 1, 1)
 
     b2.text(name.toUpperCase(), ENV.fonts.small2, '#777', 1, 1)
@@ -166,32 +163,32 @@ class VaccineRequest {
   }
 
   async exec(url) {
-      let data = {}
-      let status = ENV.status.ok
-      const request = new Request(url)
-      const result = await request.loadJSON();
-      console.log("parse vaccinations");
-      try {
+    let data = {}
+    let status = ENV.status.ok
+    const request = new Request(url)
+    const result = await request.loadJSON();
+    console.log("parse vaccinations");
+    try {
+      // console.log(res);
+      if (result && result.length > 0) {
+        const res = result[0];
         // console.log(res);
-        if (result && result.length > 0) {
-          const res = result[0];
-          // console.log(res);
-          if (res.cumsum_latest && res.cumsum2_latest && res.cumsum2_latest) {
-            data = {
-              first_vac: res.cumsum_latest,
-              second_vac: res.cumsum2_latest,
-              date: new Date(res.date)
-            }
+        if (res.cumsum_latest && res.cumsum2_latest && res.cumsum2_latest) {
+          data = {
+            first_vac: res.cumsum_latest - res.cumsum2_latest,
+            second_vac: res.cumsum2_latest,
+            date: new Date(res.date)
           }
         }
-        // console.log(data);
-        status = (typeof data.features !== 'undefined') ? ENV.status.ok : ENV.status.notfound
-        return new DataResponse(data, status)
-      } catch (e) {
-        console.log("reading data failed!");
-        console.log(e);
-        return new DataResponse({}, ENV.status.notfound)
       }
+      // console.log(data);
+      status = (typeof data.features !== 'undefined') ? ENV.status.ok : ENV.status.notfound
+      return new DataResponse(data, status)
+    } catch (e) {
+      console.log("reading data failed!");
+      console.log(e);
+      return new DataResponse({}, ENV.status.notfound)
+    }
   }
 }
 
