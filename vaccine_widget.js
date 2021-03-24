@@ -2,7 +2,7 @@
  *
  * AUTHOR:
  * Code is adapted from:
- *    CREDITS: https://github.com/rphl - https://github.com/rphl/corona-widget/
+ *    CREDITS: https://github.com/rphl - https://github.com/rphl/corona-widget/
  * data from: https://interaktiv.morgenpost.de/data/corona/rki-vaccinations.json
  * inspired by https://impfdashboard.de/data/germany_vaccinations_timeseries_v2.1f32bff3.tsv
  * https://impfdashboard.de/data/germany_vaccinations_by_state.93a1bc58.tsv
@@ -26,7 +26,7 @@ const ENV = {
     normal: Font.mediumSystemFont(12),
     small: Font.boldSystemFont(11),
     small2: Font.boldSystemFont(10),
-    xsmall: Font.boldSystemFont(9)
+    xsmall: Font.boldSystemFont(7)
   },
   status: {
     offline: 418,
@@ -87,12 +87,12 @@ class UIComp {
   static vaccineRow(view, vaccinated, vaccinated_raw, name, bgColor = '#99999915') {
     let b = new UI(view).stack('v', false, '#99999915', 12)
     let b2 = new UI(b).stack('h', [4, 0, 0, 5])
-    b2.space()
-    b2.text(vaccinated, ENV.fonts.small2, ENV.vaccinationColors.gray.color, 1, 1)
-    let trendColor =  ENV.vaccinationColors.green.color
-    b2.text('↑', ENV.fonts.small2, trendColor, 1, 1)
+    b2.space(10)
+    b2.text(vaccinated, ENV.fonts.small, ENV.vaccinationColors.gray.color, 1, 1)
+    let trendColor =  ENV.vaccinationColors.green.color
+    b2.text('↑', ENV.fonts.small, trendColor, 1, 1)
 
-    b2.text(name.toUpperCase(), ENV.fonts.small2, '#777', 1, 1)
+    b2.text(name.toUpperCase(), ENV.fonts.xsmall, '#777', 1, 1)
 
     let b3 = new UI(b).stack('h', [0, 0, 0, 5])
 
@@ -107,6 +107,33 @@ class UIComp {
     b.space(2)
   }
 
+  static vaccineBlock(view, vaccinated, vaccinated_raw, name, bgColor = '#99999915') {
+    let b = new UI(view).stack('v', false, '#99999915', 5)
+    let b2 = new UI(b).stack('h', [4, 0, 0, 5])
+    b2.space(10)
+    b2.text(vaccinated, ENV.fonts.small, ENV.vaccinationColors.gray.color, 1, 1)
+    let trendColor =  ENV.vaccinationColors.gray.color
+    b2.text('↑', ENV.fonts.small, trendColor, 1, 1)
+
+    b2.text(name.toUpperCase(), ENV.fonts.small, '#777', 1, 1)
+    b2.elem.center
+    let b3 = new UI(b).stack('h', [4, 0, 0, 5])
+    b3.space(10)
+    const germany_total = 83190556;
+    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
+    b3.text(Format.number(progress, 2, 'n/v') , ENV.fonts.small, ENV.vaccinationColors.gray.color, 1, 1)
+    b3.text('%', ENV.fonts.small, trendColor, 1, 1)
+
+    this.createProgressBar(progress, b3);
+
+    b3.space(10)
+  }
+
+  /**
+         * creates progress bar for vaccinations
+         * @param progress percent of current vaccinations
+         * @param b3 widget where progress bar is added
+         */
   static createProgressBar(progress, b3) {
     for (let i = 0; i < 100; i += 10) {
       if (progress > i) {
@@ -118,29 +145,6 @@ class UIComp {
       }
       // context.fillRect(rect)
     }
-  }
-
-  static vaccineBlock(view, vaccinated, vaccinated_raw, name, bgColor = '#99999915') {
-    let b = new UI(view).stack('v', false, '#99999915', 5)
-    let b2 = new UI(b).stack('h', [4, 0, 0, 5])
-    b2.space(2)
-    b2.text(vaccinated, ENV.fonts.small2, ENV.vaccinationColors.gray.color, 1, 1)
-    let trendColor =  ENV.vaccinationColors.gray.color
-    b2.text('↑', ENV.fonts.small2, trendColor, 1, 1)
-
-    b2.text(name.toUpperCase(), ENV.fonts.small2, '#777', 1, 1)
-    b2.elem.center
-    let b3 = new UI(b).stack('h', [0, 0, 0, 5])
-
-    const germany_total = 83190556;
-
-    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
-    b3.text(Format.number(progress, 2, 'n/v') , ENV.fonts.small2, ENV.vaccinationColors.gray.color, 1, 1)
-    b3.text('%', ENV.fonts.small2, trendColor, 1, 1)
-
-    this.createProgressBar(progress, b3);
-
-    b3.space(2)
   }
 }
 
@@ -268,4 +272,3 @@ class DataResponse {
 const vaccineRequest = new VaccineRequest();
 await new VaccineWidget().init();
 Script.complete();
-
