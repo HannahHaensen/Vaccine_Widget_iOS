@@ -13,6 +13,6 @@ v.0.0.1
 v.0.0.2
 - fixed calculation of first vaccine shots
 
-![IMG_4476](https://user-images.githubusercontent.com/22636930/112263575-d3f15880-8c6f-11eb-99c4-4a4b3fe7e938.PNG {:height="50%" width="50%"})
+![IMG_4476](https://user-images.githubusercontent.com/22636930/112263575-d3f15880-8c6f-11eb-99c4-4a4b3fe7e938.PNG){:height="50%" width="50%"}
 
 
