@@ -10,5 +10,9 @@ v.0.0.1
 - inspired by: https://impfdashboard.de and https://github.com/rphl
 - CREDITS: https://github.com/rphl
 
-![IMG_4473](https://user-images.githubusercontent.com/22636930/112229945-34fb3b00-8c34-11eb-862a-b2e7e8a1face.jpeg)
+v.0.0.2
+- fixed calculation of first vaccine shots
+
+![IMG_4476](https://user-images.githubusercontent.com/22636930/112263575-d3f15880-8c6f-11eb-99c4-4a4b3fe7e938.PNG)
+
 
