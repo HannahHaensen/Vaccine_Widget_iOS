@@ -236,15 +236,15 @@ class VaccineWidget {
     topRStack.text(updatedDate + ' ' +updatedTime, ENV.fonts.xsmall, '#777777')
 
     if (ENV.isSmallWidget) {
-      UIComp.vaccineRow(listWidget, first_vac, first_vac_raw, "Erstimpfung")
-      UIComp.vaccineRow(listWidget, second_vac, second_vac_raw,"Zweitimpfung")
+      UIComp.vaccineRow(listWidget, first_vac, first_vac_raw, "Erstimpfungen")
+      UIComp.vaccineRow(listWidget, second_vac, second_vac_raw,"Zweitimpfungen")
     } else {
 
-      UIComp.vaccineBlock(listWidget, first_vac, first_vac_raw, "Erstimpfung")
+      UIComp.vaccineBlock(listWidget, first_vac, first_vac_raw, "Erstimpfungen")
 
       listWidget.addSpacer(3)
 
-      UIComp.vaccineBlock(listWidget, second_vac, second_vac_raw, "Zweitimpfung")
+      UIComp.vaccineBlock(listWidget, second_vac, second_vac_raw, "Zweitimpfungen")
 
     }
     listWidget.addSpacer(3)
