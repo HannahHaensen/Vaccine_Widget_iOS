@@ -162,7 +162,7 @@ class Format {
 class VaccineRequest {
 
   async vaccinatedPeople() {
-    const urlVaccine = 'https://interaktiv.morgenpost.de/data/corona/rki-vaccinations.json'
+    const urlVaccine = 'https://interaktiv.morgenpost.de/data/corona/rki-vaccination.json'
     return await this.exec(urlVaccine);
   }
 
@@ -175,15 +175,19 @@ class VaccineRequest {
     try {
       // console.log(res);
       if (result && result.length > 0) {
-        const res = result[0];
-        // console.log(res);
-        if (res.cumsum_latest && res.cumsum2_latest && res.cumsum2_latest) {
-          data = {
-            first_vac: res.cumsum_latest - res.cumsum2_latest,
-            second_vac: res.cumsum2_latest,
-            date: new Date(res.date)
+        result.forEach(elem => {
+          if(elem.id && elem.id == "de") {
+            // console.log(res);
+            if (elem.cumsum_latest && elem.cumsum2_latest && elem.cumsum2_latest) {
+              data = {
+                first_vac: elem.cumsum_latest - elem.cumsum2_latest,
+                second_vac: elem.cumsum2_latest,
+                date: new Date(elem.date)
+              }
+            }
           }
-        }
+        });
+
       }
       // console.log(data);
       status = (typeof data.features !== 'undefined') ? ENV.status.ok : ENV.status.notfound
