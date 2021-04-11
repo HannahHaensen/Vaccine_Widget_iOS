@@ -3,7 +3,7 @@
  * AUTHOR:
  * Code is adapted from:
  *    CREDITS: https://github.com/rphl - https://github.com/rphl/corona-widget/
- * data from: https://interaktiv.morgenpost.de/data/corona/rki-vaccinations.json
+ * data from: https://interaktiv.morgenpost.de/data/corona/rki-vaccination.json
  * inspired by https://impfdashboard.de/data/germany_vaccinations_timeseries_v2.1f32bff3.tsv
  * https://impfdashboard.de/data/germany_vaccinations_by_state.93a1bc58.tsv
  */
