@@ -237,7 +237,7 @@ class VaccineWidget {
     topBar.space(3)
 
     let topRStack = new UI(topBar).stack('v', [0,0,0,0])
-    topRStack.text('Impffortschritt', ENV.fonts.medium)
+    topRStack.text('Impffortschritt', ENV.fonts.medium, ENV.vaccinationColors.gray.color)
     let updatedDate = Format.dateStr(data.data.date);
     let updatedTime = ('' + new Date().getHours()).padStart(2, '0') + ':' + ('' + new Date().getMinutes()).padStart(2, '0')
     topRStack.text(updatedDate + ' ' + updatedTime, ENV.fonts.xsmall, '#777777')
