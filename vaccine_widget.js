@@ -26,7 +26,8 @@ const ENV = {
     normal: Font.mediumSystemFont(12),
     small: Font.boldSystemFont(11),
     small2: Font.boldSystemFont(10),
-    xsmall: Font.boldSystemFont(7)
+    xsmall: Font.boldSystemFont(7),
+    xxsmall: Font.boldSystemFont(5),
   },
   status: {
     offline: 418,
@@ -92,7 +93,7 @@ class UIComp {
     let trendColor =  ENV.vaccinationColors.green.color
     b2.text('↑', ENV.fonts.small, trendColor, 1, 1)
 
-    b2.text(name.toUpperCase(), ENV.fonts.xsmall, '#777', 1, 1)
+    b2.text(name.toUpperCase(), ENV.fonts.xxsmall, '#777', 1, 1)
 
     let b3 = new UI(b).stack('h', [0, 0, 0, 5])
 
@@ -162,7 +163,7 @@ class Format {
 class VaccineRequest {
 
   async vaccinatedPeople() {
-    const urlVaccine = 'https://interaktiv.morgenpost.de/data/corona/rki-vaccination.json'
+    const urlVaccine = 'https://interaktiv.morgenpost.de/data/corona/rki-vaccinations-latest.json'
     return await this.exec(urlVaccine);
   }
 
@@ -178,10 +179,10 @@ class VaccineRequest {
         result.forEach(elem => {
           if(elem.id && elem.id == "de") {
             // console.log(res);
-            if (elem.cumsum_latest && elem.cumsum2_latest && elem.cumsum2_latest) {
+            if (elem.vaccinations1 && elem.vaccinations2) {
               data = {
-                first_vac: elem.cumsum_latest - elem.cumsum2_latest,
-                second_vac: elem.cumsum2_latest,
+                first_vac: elem.vaccinations1, // - elem.vaccinations2,
+                second_vac: elem.vaccinations2,
                 date: new Date(elem.date)
               }
             }
@@ -237,7 +238,7 @@ class VaccineWidget {
     topRStack.text('Impffortschritt', ENV.fonts.medium)
     let updatedDate = Format.dateStr(data.data.date);
     let updatedTime = ('' + new Date().getHours()).padStart(2, '0') + ':' + ('' + new Date().getMinutes()).padStart(2, '0')
-    topRStack.text(updatedDate + ' ' +updatedTime, ENV.fonts.xsmall, '#777777')
+    topRStack.text(updatedDate + ' ' +u pdatedTime, ENV.fonts.xsmall, '#777777')
 
     if (ENV.isSmallWidget) {
       UIComp.vaccineRow(listWidget, first_vac, first_vac_raw, "Erstimpfungen")
