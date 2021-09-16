@@ -88,19 +88,21 @@ class UIComp {
   static vaccineRow(view, vaccinated, vaccinated_raw, name, bgColor = '#99999915') {
     let b = new UI(view).stack('v', false, '#99999915', 12)
     let b2 = new UI(b).stack('h', [4, 0, 0, 5])
+
+    const germany_total = 83190556;
+    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
+
     b2.space(10)
-    b2.text(vaccinated, ENV.fonts.small, ENV.vaccinationColors.gray.color, 1, 1)
+    b2.text(Format.number(progress, 2, 'n/v') + '%', ENV.fonts.small, ENV.vaccinationColors.gray.color, 1, 1)
+    console.log(progress)
     let trendColor =  ENV.vaccinationColors.green.color
     b2.text('↑', ENV.fonts.small, trendColor, 1, 1)
 
-    b2.text(name.toUpperCase(), ENV.fonts.xxsmall, '#777', 1, 1)
+    b2.text(name.toUpperCase(), ENV.fonts.xsmall, '#777', 1, 1)
 
     let b3 = new UI(b).stack('h', [0, 0, 0, 5])
 
     b3.space(10)
-    const germany_total = 83190556;
-
-    const progress = Number.parseInt(vaccinated_raw) / germany_total * 100;
 
     this.createProgressBar(progress, b3);
     b3.space()
@@ -238,7 +240,7 @@ class VaccineWidget {
     topRStack.text('Impffortschritt', ENV.fonts.medium)
     let updatedDate = Format.dateStr(data.data.date);
     let updatedTime = ('' + new Date().getHours()).padStart(2, '0') + ':' + ('' + new Date().getMinutes()).padStart(2, '0')
-    topRStack.text(updatedDate + ' ' +u pdatedTime, ENV.fonts.xsmall, '#777777')
+    topRStack.text(updatedDate + ' ' + updatedTime, ENV.fonts.xsmall, '#777777')
 
     if (ENV.isSmallWidget) {
       UIComp.vaccineRow(listWidget, first_vac, first_vac_raw, "Erstimpfungen")
