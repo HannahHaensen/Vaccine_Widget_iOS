@@ -8,7 +8,7 @@ Use Scriptable in order to get your iOS Widget, just copy and paste the Script a
 v1.0.1
 - update API
 - added Booster vaccinations
-<img src="https://user-images.githubusercontent.com/22636930/142726323-29ad092b-63de-498a-8e8b-0bd2240607de.jpeg" width="150">
+<img src="https://user-images.githubusercontent.com/22636930/142726323-29ad092b-63de-498a-8e8b-0bd2240607de.jpeg" width="250">
 
 
 v1.0.0
